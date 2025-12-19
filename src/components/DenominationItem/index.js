@@ -2,16 +2,15 @@
 import './index.css'
 
 const DenominationItem = props => {
-  const {denominationDetails, withDrawl} = props
-  const {value} = denominationDetails
+  const {cash, cashBtn} = props
+  const {value} = cash
 
-  const onWithdrawl = () => {
-    withDrawl(value)
+  const onClickCash = () => {
+    cashBtn(value)
   }
-
   return (
-    <li>
-      <button type="button" onClick={onWithdrawl}>
+    <li className="cash-item">
+      <button className="cash-btn" type="button" onClick={onClickCash}>
         {value}
       </button>
     </li>
