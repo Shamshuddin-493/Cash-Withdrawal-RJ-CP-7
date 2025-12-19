@@ -1,44 +1,52 @@
 // Write your code here
+import './index.css'
 import {Component} from 'react'
-
 import DenominationItem from '../DenominationItem'
 
-import './index.css'
-
 class CashWithdrawal extends Component {
-  state = {cash: 2000}
+  state = {bal: 2000}
 
-  withDrawl = value => {
-    this.setState(prevState => ({cash: prevState.cash - value}))
+  cashBtn = val => {
+    this.setState(PrevState => ({
+      bal: PrevState.bal - val,
+    }))
   }
 
   render() {
-    const {cash} = this.state
+    const {bal} = this.state
     const {denominationsList} = this.props
+    const name = 'Sarah Williams'
+    const initial = name.slice(0, 1)
+
     return (
-      <div>
-        <div>
-          <div>
-            <p>S</p>
-            <p>Sarah Williams</p>
+      <div className="app-container">
+        <div className="cash-withdrawal-container">
+          <div className="user-details-container">
+            <div className="initial-container">
+              <p className="initial">{initial}</p>
+            </div>
+            <p className="name">{name}</p>
           </div>
-          <div>
-            <p>Your Balance</p>
-            <p>{cash}</p>
+          <div className="balance-container">
+            <p className="your-balance">Your Balance</p>
+            <p className="balance">
+              {bal}
+              <br />
+              <span className="currency">In Rupees</span>
+            </p>
           </div>
-          <p>In Rupees</p>
+          <p className="withdraw">Withdraw</p>
+          <p className="choose-sum">CHOOSE SUM (IN RUPEES)</p>
+          <ul className="denominations-list">
+            {denominationsList.map(eachDenomination => (
+              <DenominationItem
+                key={eachDenomination.id}
+                cash={eachDenomination}
+                cashBtn={this.cashBtn}
+              />
+            ))}
+          </ul>
         </div>
-        <h1>Withdraw</h1>
-        <p>CHOOSE SUM IN RUPEES</p>
-        <ul>
-          {denominationsList.map(eachDenomination => (
-            <DenominationItem
-              denominationDetails={eachDenomination}
-              key={eachDenomination.id}
-              withDrawl={this.withDrawl}
-            />
-          ))}
-        </ul>
       </div>
     )
   }
